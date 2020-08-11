@@ -1,0 +1,102 @@
+@font-face {
+  font-family: "Glyphicons Halflings";
+  src: url("../fonts/glyphicons-halflings-regular.eot");
+  src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: "Glyphicons Halflings";
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+.feature-big
+{
+  background: linear-gradient(141deg, #fff 0%, #F6F6F6 51%, #E9EDF5 75%);
+
+}
+
+.white
+{
+color:white;
+}
+
+.login-container{
+	margin: 5% auto;
+}
+
+.pd-top-dynamic{
+	min-height: 450px;
+}
+
+.header-bg{
+	background: #819CCC;
+}
+
+#q7-input{
+	background-color: white !important;
+	height: 30px;
+}
+.q7-op1:before,.q7-op1:after,.q5-op2:before,.q5-op2:after {
+	top: 0.50rem;
+}
+#q1-sub-questions{
+	margin:3%;
+	font-size: 14px;
+}
+#q1-sub-questions p{
+	margin-top: 1%
+}
+.error-div{
+	display: none;
+}
+.error{
+	display:block;
+	color: red;
+}
+
+.form-control.is-invalid{
+	border-color: #dc3545 !important;
+    padding-right: calc(1.5em + 0.75rem) !important;
+}
+#q9-file-section{
+	display: none;
+}
+.btn-outline-primary:hover,.btn-outline-primary:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: #809ccc;
+    border-color: #809ccc;
+}
+
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:active {
+  background: #47a7f5 radial-gradient(ellipse, transparent 1%, #47a7f5 1%) center/1500%;
+}
+/*.ripple:active {
+  background-color: #6eb9f7;
+  background-size: 100%;
+  transition: background 0s;
+}
+*/
+
+.gotoregister{
+	width: auto;
+	padding: 10px;
+    margin: 10px;
+}
+
+.add-to-cart{
+  cursor: pointer;
+}
