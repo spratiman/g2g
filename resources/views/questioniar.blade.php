@@ -57,36 +57,25 @@
 	<div class=" pd-top-dynamic" ng-app="myApp" ng-controller="myCtrl" id="myAppCtrl">
 	   <div class="container-fluid">
 	      <div class="row justify-content-center" >
-	         <div class="col-11 col-sm-10 col-md-10 col-lg-8 col-xl-8 text-center p-0 mt-3 mb-4" >
+	         <div class="col-11 col-sm-10 col-md-10  {{auth()->check() ? 'col-lg-6 col-xl-6':'col-lg-8 col-xl-8' }}  text-center p-0 mt-3 mb-4" >
 	            <div class="card px-0 pt-4 pb-0 mt-3 mb-3" >
 	               <h2 id="heading">Main Heading will go here</h2>
 	               <p>Sub heading will go here</p>
-	               <form id="msform" method="POST" action="{{ route('register') }}">
-	               	 @csrf
-	                  <!-- progressbar -->
-	                  <input type="hidden" name="q1" value="">
-	                  <input type="hidden" name="q1-sq1" value="">
-	                  <input type="hidden" name="q1-sq2" value="">
-	                  <input type="hidden" name="q1-sq3" value="">
-	                  <input type="hidden" name="q2" value="">
-	                  <input type="hidden" name="q3" value="">
-	                  <input type="hidden" name="q4" value="">
-	                  <input type="hidden" name="q5" value="">
-	                  <input type="hidden" name="q6" value="">
-	                  <input type="hidden" name="q7" value="">
-	                  <input type="hidden" name="q8" value="">
-	                  <input type="hidden" name="q9" value="">
-
-	                  <ul id="progressbar">
-                        <li class="active confirm" id="products-step"><strong>Products</strong></li>
-                        <li class="confirm" id="personal-step"><strong>Personal</strong></li>
-                        <li class="confirm" id="financial-step"><strong>Financial Status</strong></li>
-                        <li class="confirm" id="recommendation-step"><strong>Recommendation</strong></li>
-                        <li class="confirm" id="review-step"><strong>Review</strong></li>
+	               	<form id="msform" method="POST" action="{{ route('register') }}">
+	               		@csrf
+	                	<input type="hidden" name="questioniar_id" value="" id="questioniar_id">
+   					
+   					<!-- progressbar -->
+	                <ul id="progressbar">
+                        <li class="active confirm {{auth()->check() ? 'width-20':'' }}" id="products-step"><strong>Products</strong></li>
+                        <li class="confirm {{auth()->check() ? 'width-20':'' }}" id="personal-step"><strong>Personal</strong></li>
+                        <li class="confirm {{auth()->check() ? 'width-20':'' }}" id="financial-step"><strong>Financial Status</strong></li>
+                        <li class="confirm {{auth()->check() ? 'width-20':'' }}" id="recommendation-step"><strong>Recommendation</strong></li>
+                        <li class="confirm {{auth()->check() ? 'width-20':'' }}" id="review-step"><strong>Review</strong></li>
                         @guest
                          <li class="confirm" id="registration-step"><strong>Registration</strong></li>
                       	@endguest
-                      </ul>
+                    </ul>
 
 	                 <!--  <div class="progress">
 	                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
@@ -521,14 +510,14 @@
 
 							    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#recommndationAccordion">
 							      <div class="card-body">
-							         <div class="form-group row">
-									    <label class="control-label col-sm-2" ><b> Premium:</b></label>
-									    <div class="col-sm-10 " id="low_premium">
+							         <div class="form-group row p-1">
+									    <label class="control-label col-sm-2 recommendation-label-color" ><b> Premium:</b></label>
+									    <div class="col-sm-10 pl-0 " id="low_premium">
 									      	
 									    </div>
 									  </div>
-									  <div class="form-group" id="low_term_20">
-									    <label class="control-label" > <b>Term 20: </b></label>
+									  <div class="form-group p-1" id="low_term_20">
+									    <label class="control-label recommendation-label-color" > <b>Term 20: </b></label>
 									    
 									  </div>
 							      </div>
@@ -544,19 +533,19 @@
 							    </div>
 							    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#recommndationAccordion">
 							      <div class="card-body">
-							      	<div class="form-group row">
-									    <label class="control-label col-sm-2" > <b>Premium:</b></label>
-									    <div class="col-sm-10 " id="medium_premium">
+							      	<div class="form-group row p-1">
+									    <label class="control-label col-sm-2 recommendation-label-color" > <b>Premium:</b></label>
+									    <div class="col-sm-10 pl-0" id="medium_premium">
 									      	
 									    </div>
 									  </div>
-									  <div class="form-group" id="medium_term_20">
-									    <label class="control-label" > <b>Term 20:</b></label>
+									  <div class="form-group p-1" id="medium_term_20">
+									    <label class="control-label recommendation-label-color" > <b>Term 20:</b></label>
 									    
 									  </div>
-									  <div class="form-group row d-none" id="medium_pay_20_div">
-									    <label class="control-label col-sm-2" ><b>20 Pay:</b></label>
-									    <div class="col-sm-10 " id="medium_pay_20">
+									  <div class="form-group row d-none p-1" id="medium_pay_20_div">
+									    <label class="control-label col-sm-2 recommendation-label-color" ><b>20 Pay:</b></label>
+									    <div class="col-sm-10 pl-0" id="medium_pay_20">
 									      
 									    </div>
 									  </div>
@@ -573,20 +562,20 @@
 							    </div>
 							    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#recommndationAccordion">
 							      	<div class="card-body">
-							       	<div class="form-group row">
-									    <label class="control-label col-sm-2" ><b>Premium:</b></label>
-									    <div class="col-sm-10 " id="high_premium">
+							       	<div class="form-group row  p-1">
+									    <label class="control-label col-sm-2 recommendation-label-color" ><b>Premium:</b></label>
+									    <div class="col-sm-10 pl-0" id="high_premium">
 									      	
 									    </div>
 
 									  </div>
-									  <div class="form-group" id="high_term_20">
-									    <label class="control-label " ><b>Term 20:</b></label>
+									  <div class="form-group p-1" id="high_term_20">
+									    <label class="control-label recommendation-label-color " ><b>Term 20:</b></label>
 									    
 									  </div>
-									  <div class="form-group row d-none" id="high_pay_20_div">
-									    <label class="control-label col-sm-2" ><b> 20 Pay:</b></label>
-									    <div class="col-sm-10" id="high_pay_20">
+									  <div class="form-group row d-none p-1" id="high_pay_20_div">
+									    <label class="control-label col-sm-2 recommendation-label-color" ><b> 20 Pay:</b></label>
+									    <div class="col-sm-10 pl-0" id="high_pay_20">
 									      
 									    </div>
 									  </div>
@@ -595,7 +584,7 @@
 							  </div>
 							</div>
 	                     </div>
-	                     <input type="button" name="next" class="next action-button" value="Go to Review" /> 
+	                     <input type="button" name="next" class="next action-button gotoregister" value="Go to Review" /> 
 	                     <input type="button" name="previous" class="previous action-button-previous" value="Previous"  />
 	                  </fieldset>
 	                  <fieldset id="step14">
@@ -609,10 +598,9 @@
 								  </tr>
 								  <tr ng-repeat="(key, value) in q_ans">
 								    <td>Q<% key+1 %></td>
-								    <td > <%value.q%></td>
-								    <td><%value.ans%></td>
+								    <td><% value.q %></td>
+								    <td><% value.a %></td>  
 								  </tr>
-								  
 								</table>
 							</div>
 							<hr>
@@ -628,16 +616,15 @@
 								    	<td><% value.level %></td>
 								    	<td><%value.type %></td>
 								    	<td><%value.value%></td>
-
 								 	</tr>
-								  
 								</table>
 							</div>
 	                  	</div>
+	                  	<input type="button" name="next" class="next action-button gotoregister width-97" value="Register to Save Your Recommendations" /> 
 	                  </fieldset>
 	                  @guest
 	                  <fieldset id="step15">
-	                     <div class="form-card pr-4 pl-4">
+	                  	<div class="form-card pr-4 pl-4">
 	                     	<div class="row">
 	                           <div class="col-7">
 	                              <h2 class="fs-title">Register Yourself: <small>(optional)</small></h2>
@@ -718,11 +705,10 @@
                         <button type="button" class="action-button register-btn" >
                             {{ __('Register') }}
                         </button>
-                        <input type="button" name="next" class="next action-button action-button-previous " value="Skip" />
-                         
+                                  
 	                  </fieldset>
 	                  @endguest
-	               </form>
+	              	</form>
 	            </div>
 	         </div>
 	      </div>
@@ -736,12 +722,23 @@
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
     });
+
 	app.controller('myCtrl', function($scope) {
 	  $scope.step_number = 1;
 	  $scope.haveChildren = 0;
 	  $scope.havePolicy = 0;
 	  $scope.q_ans = [];
 	  $scope.saved_recomendations = [];
+	  $scope.questioniar_id = null;
+	  $scope.state = 0;
+	  $scope.auth = "{{ auth()->check() ? 1:0 }}";
+	  @if($questioniar == null)
+	  	$scope.questioniar = @json(config('questions'));
+	  @else
+	  	$scope.questioniar = @json(json_decode($questioniar->answers));
+	  	$scope.questioniar_id = "{{$questioniar->id}}";
+	  	$scope.state = "{{ $questioniar->state }}";
+	  @endif
 	});
 
 	$("body").on('change','input[type=radio][name=q7-options]', function(event){

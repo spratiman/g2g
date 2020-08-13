@@ -20,7 +20,8 @@
     <!-- Styles -->
     <link href="{{ asset(config('custom.public-path').'css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset(config('custom.asset-path').'css/custom.css')}}">
-    
+    @yield('style')
+    @yield('header-script')
 </head>
 <body>
     <div id="app">
@@ -58,6 +59,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    
+                                     <a class="dropdown-item" href="{{ route('questioniar') }}">
+                                        {{ __('Free Recommendation') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -79,5 +84,6 @@
             @yield('content')
         </main>
     </div>
+    @yield('script')
 </body>
 </html>

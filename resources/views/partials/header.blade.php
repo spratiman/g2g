@@ -19,11 +19,11 @@
                 <b><i class="fa fa-calculator" style="color:#fff"></i> Free Recommendation</b>
               </a>
             </li>
-            <li>
+            <!-- <li>
               <a href="#" class="nav-link white">
                 <b><i class="fa fa-question-circle" style="color:#fff"> Why {{config('app.name')}} </i> </b>
               </a>
-            </li>
+            </li> -->
             <li>
             @guest
               <a href="{{ route('login') }}" class="nav-link white"><b><i class="fa fa-user" style="color:#fff"></i> Login</b></a>

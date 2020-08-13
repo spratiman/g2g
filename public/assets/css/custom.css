@@ -99,4 +99,18 @@ color:white;
 
 .add-to-cart{
   cursor: pointer;
+  font-size: 1.3rem;
+  margin-right: 30px;
+}
+
+.recommendation-label-color{
+  color: #4473c3;
+}
+
+.width-20{
+  width: 20% !important;
+}
+
+.width-97{
+  width: 97% !important;
 }

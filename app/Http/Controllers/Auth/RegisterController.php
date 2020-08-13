@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Questioniar;
+
 
 class RegisterController extends Controller
 {
@@ -65,12 +67,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'phone_number' => $data['phone_number'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        if(isset($data['questioniar_id'])){
+            $questioniar = Questioniar::where('id',$data['questioniar_id'])->where('status',0)->get()->last();
+            if($questioniar != null){
+                $questioniar->user_id = $user->id;
+                $questioniar->status = 1;
+                $questioniar->state = 9;
+                $questioniar->save();
+            }
+        }
+        return $user;
     }
 }

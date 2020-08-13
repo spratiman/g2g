@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/insurance-aid', 'QuestioniarController@index')->name('questioniar');
 Route::post('/questioniar/save', 'QuestioniarController@save')->name('questioniar.save');
+Route::get('/questioniar/{id}', 'QuestioniarController@show')->name('questioniar.view');

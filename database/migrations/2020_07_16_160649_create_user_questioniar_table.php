@@ -18,8 +18,10 @@ class CreateUserQuestioniarTable extends Migration
             $table->integer('user_id')->nullable();
             $table->ipAddress('ip_address')->nullable();
             $table->json('answers')->nullable();
-            $table->json('recommendation')->nullable();
+            $table->json('recommendations')->nullable();
+            $table->json('saved_recommendations')->nullable();
             $table->boolean('status')->default(0);
+            $table->smallInteger('state')->default(0);
             $table->timestamps();
         });
     }

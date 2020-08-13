@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Questioniar; 
 
 class HomeController extends Controller
 {
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $questionairs = Questioniar::where('user_id',auth()->id())->latest()->get();
+        return view('home',compact('questionairs'));
     }
 }
