@@ -182,7 +182,7 @@
 	                        </div>
 	                        <!-- Group of default radios - option 2 -->
 	                        <div class="custom-control custom-radio">
-	                           <input type="radio" class="custom-control-input sq-options" id="sq1-op2" name="sq1" value="0">
+	                           <input type="radio" class="custom-control-input sq-options" id="sq1-op2" name="sq1" value="1">
 	                           <label class="custom-control-label" for="sq1-op2">Yes</label>
 	                        </div>
 	                     </div>
@@ -205,7 +205,7 @@
 	                        </div>
 	                        <!-- Group of default radios - option 2 -->
 	                        <div class="custom-control custom-radio">
-	                           <input type="radio" class="custom-control-input sq-options" id="sq2-op2" name="sq2" value="1">
+	                           <input type="radio" class="custom-control-input sq-options" id="sq2-op2" name="sq2" value="2">
 	                           <label class="custom-control-label" for="sq2-op2">Yes</label>
 	                        </div>
 	                     </div>
@@ -228,7 +228,7 @@
 	                        </div>
 	                        <!-- Group of default radios - option 2 -->
 	                        <div class="custom-control custom-radio">
-	                           <input type="radio" class="custom-control-input sq-options" id="sq3-op2" name="sq3" value="2">
+	                           <input type="radio" class="custom-control-input sq-options" id="sq3-op2" name="sq3" value="3">
 	                           <label class="custom-control-label" for="sq3-op2">Yes</label>
 	                        </div>
 	                     </div>
@@ -261,11 +261,11 @@
 	                        </div>
 	                        <p>What is your gender?</p>
 	                        <div class="custom-control custom-radio">
-	                           <input type="radio" class="custom-control-input" id="q3-op1" name="q3-options" value="male">
+	                           <input type="radio" class="custom-control-input" id="q3-op1" name="q3-options" value="Male">
 	                           <label class="custom-control-label" for="q3-op1">Male</label>
 	                        </div>
 	                        <div class="custom-control custom-radio">
-	                           <input type="radio" class="custom-control-input" id="q3-op2" name="q3-options" value="female" >
+	                           <input type="radio" class="custom-control-input" id="q3-op2" name="q3-options" value="Female" >
 	                           <label class="custom-control-label" for="q3-op2">Female</label>
 	                        </div>
 	                     </div>
@@ -282,12 +282,12 @@
 	                        <p>Are you a smoker?</p>
 	                        <!-- Group of default radios - option 1 -->
 	                        <div class="custom-control custom-radio">
-	                           <input type="radio" class="custom-control-input" id="q4-op1" name="q4-options" value="no">
+	                           <input type="radio" class="custom-control-input" id="q4-op1" name="q4-options" value="No">
 	                           <label class="custom-control-label" for="q4-op1">No</label>
 	                        </div>
 	                        <!-- Group of default radios - option 2 -->
 	                        <div class="custom-control custom-radio">
-	                           <input type="radio" class="custom-control-input" id="q4-op2" name="q4-options" value="yes" >
+	                           <input type="radio" class="custom-control-input" id="q4-op2" name="q4-options" value="Yes" >
 	                           <label class="custom-control-label" for="q4-op2">Yes</label>
 	                        </div>
 	                     </div>
@@ -383,7 +383,7 @@
 	                        <div class="custom-control custom-radio">
 	                           <input type="radio" class="custom-control-input" id="q7-op1" name="q7-options" value="1">
 	                           <label class="custom-control-label q7-op1" for="q7-op1">
-	                           		<input type="text" class="form-control" id="q7-input" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="Enter mortgage payment value">
+	                           		<input type="text" class="form-control" id="q7-input" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="Enter Value">
 	                           </label>
 	                        </div>
 	                        <!-- Group of default radios - option 2 -->
@@ -443,14 +443,14 @@
 	                        </div>
 	                        <!-- Group of default radios - option 2 -->
 	                        <div class="custom-control custom-radio">
-	                           <input type="radio" class="custom-control-input" id="q9-op3" name="q9-options" value="2"  ng-click="havePolicy = 0">
+	                           <input type="radio" class="custom-control-input" id="q9-op3" name="q9-options" value="2"  ng-click="havePolicy = 2">
 	                           <label class="custom-control-label" for="q9-op3">Not Sure</label>
 	                        </div>
 	                     </div>
-	                     <div id="q9-file-section">
-	                     	<label class="fieldlabels">Upload any group benefit document, if you have</label> <input type="file" name="pic" accept="image/*"> 
+	                     <div ng-show="havePolicy == 2">
+	                     	<label class="fieldlabels">Upload any group benefit document, if you have</label> <input type="file" name="pic" id="insurance_document" accept="image/*"> 
 	                     </div>
-	                     <div ng-show="havePolicy">
+	                     <div ng-show="havePolicy == 1">
 	                     	<div class="custom-control pb-2"  >
 	                           <select class="form-control" id="q9-input1" >
 	                           		<option value="">Select your insurance plan</option>
@@ -496,7 +496,7 @@
 	                     @endguest
 	                     <input type="button" name="previous" class="previous action-button-previous" value="Previous"  /> -->
 
-	                     <div class="form-card  pr-4 pl-4">
+	                     <div class="form-card  pr-4 pl-4 mb-4">
 	                        <div class="accordion" id="recommndationAccordion">
 							  <div class="card">
 							    <div class="card-header" id="headingOne">
@@ -511,7 +511,7 @@
 							    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#recommndationAccordion">
 							      <div class="card-body">
 							         <div class="form-group row p-1">
-									    <label class="control-label col-sm-2 recommendation-label-color" ><b> Premium:</b></label>
+									    <label class="control-label pr-0 col-sm-2 recommendation-label-color" ><b> Premium:</b></label>
 									    <div class="col-sm-10 pl-0 " id="low_premium">
 									      	
 									    </div>
@@ -534,7 +534,7 @@
 							    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#recommndationAccordion">
 							      <div class="card-body">
 							      	<div class="form-group row p-1">
-									    <label class="control-label col-sm-2 recommendation-label-color" > <b>Premium:</b></label>
+									    <label class="control-label pr-0 col-sm-2 recommendation-label-color" > <b>Premium:</b></label>
 									    <div class="col-sm-10 pl-0" id="medium_premium">
 									      	
 									    </div>
@@ -563,7 +563,7 @@
 							    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#recommndationAccordion">
 							      	<div class="card-body">
 							       	<div class="form-group row  p-1">
-									    <label class="control-label col-sm-2 recommendation-label-color" ><b>Premium:</b></label>
+									    <label class="control-label pr-0 col-sm-2 recommendation-label-color" ><b>Premium:</b></label>
 									    <div class="col-sm-10 pl-0" id="high_premium">
 									      	
 									    </div>
@@ -584,8 +584,14 @@
 							  </div>
 							</div>
 	                     </div>
-	                     <input type="button" name="next" class="next action-button gotoregister" value="Go to Review" /> 
-	                     <input type="button" name="previous" class="previous action-button-previous" value="Previous"  />
+	                     @guest
+	                  		 <input type="button" name="next" class="next action-button gotoregister width-97" value="Review Your Recommendations" /> 
+	                  	@else
+	                  		<input type="button" name="next" class="next action-button gotoregister width-97" value="Review And Save Your Recommendations" style="margin-top: 5% !important;"/>
+	                  	
+	                  	@endguest 
+	                    
+	                    
 	                  </fieldset>
 	                  <fieldset id="step14">
 	                  	<div class="form-card  pr-4 pl-4">
@@ -599,7 +605,20 @@
 								  <tr ng-repeat="(key, value) in q_ans">
 								    <td>Q<% key+1 %></td>
 								    <td><% value.q %></td>
-								    <td><% value.a %></td>  
+								    <td>
+								    	<% value.a %>
+								    	<span ng-if="value.c_amount != undefined">
+		                                   <br>
+		                                   <b> Coverage Amount</b> : <% value.c_amount %> 
+		                                   <br>
+		                                   <b> Insurance Plan</b> : <% value.insurance_plan %> 
+		                                </span>
+		                                <span ng-if="value.insurance_document != undefined">
+		                                   <br>
+		                                   <b> Insurance Document</b> <br> 
+                                        	<img src="<% value.insurance_document %>" class="showImage" style="width:125px;">   
+		                                </span>
+								    </td>  
 								  </tr>
 								</table>
 							</div>
@@ -620,7 +639,12 @@
 								</table>
 							</div>
 	                  	</div>
-	                  	<input type="button" name="next" class="next action-button gotoregister width-97" value="Register to Save Your Recommendations" /> 
+	                  	@guest
+	                  	<input type="button" name="next" class="next action-button gotoregister width-97" value="Register to Save Your Recommendations" />
+	                  	@else
+	                  		<a href="{{route('home')}}" class="action-button gotoregister width-97" >Go To Dashboard</a>
+	                  	
+	                  	@endguest 
 	                  </fieldset>
 	                  @guest
 	                  <fieldset id="step15">
@@ -736,8 +760,9 @@
 	  	$scope.questioniar = @json(config('questions'));
 	  @else
 	  	$scope.questioniar = @json(json_decode($questioniar->answers));
+	  	$scope.recommendations = @json(json_decode($questioniar->recommendations));
 	  	$scope.questioniar_id = "{{$questioniar->id}}";
-	  	$scope.state = "{{ $questioniar->state }}";
+	  	$scope.state = parseInt("{{ $questioniar->state }}");
 	  @endif
 	});
 

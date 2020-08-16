@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Questioniar extends Model
 {
     protected $fillable = [
-        'user_id', 'ip_address','answers','recommendation','status','state'
+        'user_id', 'ip_address','answers','recommendations','saved_recommendations','status','state'
     ];
 
 

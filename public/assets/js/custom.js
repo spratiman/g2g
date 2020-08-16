@@ -13,13 +13,13 @@ $("body").on('click','#show-password', function(event){
 });
 
 
-$("body").on('change','input[type=radio][name=q9-options]', function(event){
-	if($('input[name="q9-options"]:checked').val() == 2){
-        $("#q9-file-section").show();
-	}else{
-		$("#q9-file-section").hide();
-	}
-});
+// $("body").on('change','input[type=radio][name=q9-options]', function(event){
+// 	if($('input[name="q9-options"]:checked').val() == 2){
+//         $("#q9-file-section").show();
+// 	}else{
+// 		$("#q9-file-section").hide();
+// 	}
+// });
 
 $("body").on('click','.q1-options', function(event){
 		$("#q1-op4").prop('checked',false);
@@ -70,5 +70,10 @@ $("body").on('click','.register-btn', function(event){
             }
         }      
     });
+});
+
+$("body").on('click','.showImage', function(event){
+    var newTab = window.open();
+    newTab.document.body.innerHTML = "<img src='"+ $(this).attr('src')+"''> ";    
 });
 

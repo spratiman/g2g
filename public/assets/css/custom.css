@@ -92,9 +92,9 @@ color:white;
 */
 
 .gotoregister{
-	width: auto;
-	padding: 10px;
-    margin: 10px;
+	width: auto !important;
+	padding: 10px !important;
+    margin: 10px !important;
 }
 
 .add-to-cart{
@@ -113,4 +113,7 @@ color:white;
 
 .width-97{
   width: 97% !important;
+}
+.pd-top-5-per{
+  padding-top: 5%;
 }

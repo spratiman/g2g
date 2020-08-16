@@ -79,7 +79,7 @@ class RegisterController extends Controller
             if($questioniar != null){
                 $questioniar->user_id = $user->id;
                 $questioniar->status = 1;
-                $questioniar->state = 9;
+                $questioniar->state = 12;
                 $questioniar->save();
             }
         }

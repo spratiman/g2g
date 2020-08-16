@@ -11,14 +11,20 @@ class QuestioniarController extends Controller
 
         $questioniar = null;
         if(auth()->id() != null){
-            $questioniar =  Questioniar::where('user_id',auth()->id())->where('status',0)->get()->last();
+            $q_id = null;
+            $q_id = session()->get('q_id');
+            $questioniar =  Questioniar::where('user_id',auth()->id());
+            if(isset($q_id)){
+                $questioniar = $questioniar->where('id',$q_id);
+            }
+            $questioniar = $questioniar->where('status',0)->get()->last();
         }
     	return view('questioniar',compact('questioniar'));
     }
     
     public function save(Request $request){
     	if($request->id){
-    		$questioniar =  Questioniar::firstOrNew(['id' => $request->id]);
+    		$questioniar =  Questioniar::find($request->id);
     		
     	}else{
     		$questioniar =  new Questioniar();
@@ -28,9 +34,9 @@ class QuestioniarController extends Controller
     	$questioniar->ip_address = $request->ip();
     	$questioniar->answers = $request->answers;
     	$questioniar->recommendations = $request->result_calculation;
-        $questioniar->saved_recommendations = $request->saved_recommendations ?? null;
+        $questioniar->saved_recommendations = $request->saved_recommendations != null  ? $request->saved_recommendations:$questioniar->saved_recommendations;
     	$questioniar->status = $request->status ?? 0;
-        $questioniar->state = $request->state ?? 0;
+        $questioniar->state = $request->state < $questioniar->state == false ? $request->state : $questioniar->state;
     	$questioniar->save();
 
     	if($request->ajax()){
