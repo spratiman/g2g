@@ -40,7 +40,7 @@
                                 <span ng-if="value.insurance_document != undefined">
                                     <br>
                                     <b> Insurance Document</b> <br> 
-                                    <img src="<% value.insurance_document %>" class="showImage" style="width:125px;">
+                                    <img ng-if="value.insurance_document != undefined" src="<% value.insurance_document %>" class="showImage" style="width:125px;">
                                 </span>
                             </td>  
 						  </tr>
@@ -128,6 +128,7 @@
                 }
             }
             var keys = Object.keys(saved_responses.high.term_20);
+            
             for (const key of keys) {
                 if(saved_responses.high.term_20[key] == 1){
             
@@ -136,13 +137,22 @@
                 }
             }; 
 
-            if(saved_responses.medium.pay_20 == 1){
-                $scope.saved_recomendations.push({ level:"Medium" ,type:"Pay 20",value:result_calculation.medium.pay_20.value});
-                
-            }
-            if(saved_responses.high.pay_20 == 1){
-                $scope.saved_recomendations.push({ level:"High" ,type:"Pay 20",value:result_calculation.high.pay_20.value});      
-            }
+            var pay_20_keys = Object.keys(saved_responses.medium.pay_20);
+            for (const pay_20_key of pay_20_keys) {
+                if(saved_responses.medium.pay_20[pay_20_key] == 1){
+                    
+                    $scope.saved_recomendations.push({ level:"Medium" ,type:"Pay 20",value:result_calculation.medium.pay_20[pay_20_key].type +": "+result_calculation.medium.pay_20[pay_20_key]['value']});
+                    
+                }
+            }; 
+
+            var pay_20_keys = Object.keys(saved_responses.high.pay_20);
+            for (const pay_20_key of pay_20_keys) {
+                if(saved_responses.high.pay_20[pay_20_key] == 1){
+            
+                    $scope.saved_recomendations.push({ level:"High" ,type:"Pay 20",value:result_calculation.high.pay_20[pay_20_key].type +": "+result_calculation.high.pay_20[pay_20_key]['value']});
+                }
+            };
         });
     </script>
 @endsection

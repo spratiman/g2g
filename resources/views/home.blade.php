@@ -22,26 +22,34 @@
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
-                          @foreach($questionairs as $questioniar)
-                          <tr>
-                            <td> {{$loop->index + 1}}</td>
-                            <td> {{$questioniar->created_at->format('F d-Y H:i') }} </td>
-                            @if($questioniar->status == 1)
-                            <td> Completed </td>
-                            <td> 
-                                <a href="{{route('questioniar.view',$questioniar->id)}}"> View Questioniar </a>
-                            </td>
+                          @if(count($questionairs) > 0)
+                                @foreach($questionairs as $questioniar)
+                                  <tr>
+                                    <td> {{$loop->index + 1}}</td>
+                                    <td> {{$questioniar->created_at->format('F d-Y H:i') }} </td>
+                                    @if($questioniar->status == 1)
+                                    <td> Completed </td>
+                                    <td> 
+                                        <a href="{{route('questioniar.view',$questioniar->id)}}"> View Questioniar </a>
+                                    </td>
+                                    @else
+                                    <td> Open </td>
+                                    <td> 
+                                        @php
+                                            session()->flash('q_id',$questioniar->id);
+                                        @endphp
+                                        <a href="{{route('questioniar')}}"> Open Questioniar </a>
+                                    </td>
+                                    @endif  
+                                  </tr>
+                                @endforeach
                             @else
-                            <td> Open </td>
-                            <td> 
-                                @php
-                                    session()->flash('q_id',$questioniar->id);
-                                @endphp
-                                <a href="{{route('questioniar')}}"> Open Questioniar </a>
-                            </td>
-                            @endif  
-                          </tr>
-                          @endforeach
+                                <tr>
+                                    <td colspan="4" class="text-center">
+                                       <h5> No Recommendation Yet.</h5><a href="{{ route('questioniar') }}" class="btn btn-primary mr-2 mb-2"> <i class="fa fa-money" style="color:#fff"></i> Get Free Recommendation</a>
+                                    </td>
+                                </tr>
+                            @endif
                         </table>
                     </div>
                 </div>

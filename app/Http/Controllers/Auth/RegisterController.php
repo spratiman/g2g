@@ -75,7 +75,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         if(isset($data['questioniar_id'])){
-            $questioniar = Questioniar::where('id',$data['questioniar_id'])->where('status',0)->get()->last();
+            $questioniar = Questioniar::find($data['questioniar_id']);
             if($questioniar != null){
                 $questioniar->user_id = $user->id;
                 $questioniar->status = 1;

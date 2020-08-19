@@ -30,13 +30,20 @@ class QuestioniarController extends Controller
     		$questioniar =  new Questioniar();
 		}
 
+
+        if($request->state >= 1 && $request->state < 5 ){
+            $current_state = $request->state; 
+        }else{
+            $current_state = $request->state < $questioniar->state == false ? $request->state : $questioniar->state;
+        }
+        
         $questioniar->user_id = auth()->id() ?? null;
     	$questioniar->ip_address = $request->ip();
     	$questioniar->answers = $request->answers;
     	$questioniar->recommendations = $request->result_calculation;
         $questioniar->saved_recommendations = $request->saved_recommendations != null  ? $request->saved_recommendations:$questioniar->saved_recommendations;
     	$questioniar->status = $request->status ?? 0;
-        $questioniar->state = $request->state < $questioniar->state == false ? $request->state : $questioniar->state;
+        $questioniar->state = $current_state;
     	$questioniar->save();
 
     	if($request->ajax()){

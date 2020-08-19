@@ -516,8 +516,10 @@
 									      	
 									    </div>
 									  </div>
-									  <div class="form-group p-1" id="low_term_20">
+									  <div class="form-group p-1">
 									    <label class="control-label recommendation-label-color" > <b>Term 20: </b></label>
+									    <ul class='ml-4 pl-4' id="low_term_20">
+									    </ul>
 									    
 									  </div>
 							      </div>
@@ -539,15 +541,16 @@
 									      	
 									    </div>
 									  </div>
-									  <div class="form-group p-1" id="medium_term_20">
+									  <div class="form-group p-1" >
 									    <label class="control-label recommendation-label-color" > <b>Term 20:</b></label>
+									    <ul class='ml-4 pl-4' id="medium_term_20">
+									    </ul>
 									    
 									  </div>
-									  <div class="form-group row d-none p-1" id="medium_pay_20_div">
-									    <label class="control-label col-sm-2 recommendation-label-color" ><b>20 Pay:</b></label>
-									    <div class="col-sm-10 pl-0" id="medium_pay_20">
-									      
-									    </div>
+									  <div class="form-group d-none p-1" id="medium_pay_20_div">
+									    <label class="control-label  recommendation-label-color" ><b>20 Pay:</b></label>
+									    <ul class='ml-4 pl-4' id="medium_pay_20">
+									    </ul>
 									  </div>
 							      </div>
 							    </div>
@@ -569,15 +572,16 @@
 									    </div>
 
 									  </div>
-									  <div class="form-group p-1" id="high_term_20">
+									  <div class="form-group p-1" >
 									    <label class="control-label recommendation-label-color " ><b>Term 20:</b></label>
+									    <ul class='ml-4 pl-4' id="high_term_20">
+									    </ul>
 									    
 									  </div>
-									  <div class="form-group row d-none p-1" id="high_pay_20_div">
-									    <label class="control-label col-sm-2 recommendation-label-color" ><b> 20 Pay:</b></label>
-									    <div class="col-sm-10 pl-0" id="high_pay_20">
-									      
-									    </div>
+									  <div class="form-group d-none p-1" id="high_pay_20_div">
+									    <label class="control-label recommendation-label-color" ><b> 20 Pay:</b></label>
+									    <ul class='ml-4 pl-4' id="high_pay_20">
+									    </ul>
 									  </div>
 							       	</div>
 							    </div>
@@ -616,7 +620,7 @@
 		                                <span ng-if="value.insurance_document != undefined">
 		                                   <br>
 		                                   <b> Insurance Document</b> <br> 
-                                        	<img src="<% value.insurance_document %>" class="showImage" style="width:125px;">   
+                                        	<img  ng-if="value.insurance_document != undefined" src="<% value.insurance_document %>" class="showImage" style="width:125px;">   
 		                                </span>
 								    </td>  
 								  </tr>
@@ -742,6 +746,10 @@
 @section('script')
   <script src="{{ asset(config('custom.asset-path').'js/script.js') }}"></script>
   <script>
+  	$(document).ready(function(){
+	  $('[data-toggle="tooltip"]').tooltip();   
+	});
+  	
   	var app = angular.module('myApp', [], function($interpolateProvider) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');

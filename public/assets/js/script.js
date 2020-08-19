@@ -13,11 +13,7 @@ $(document).ready(function() {
                 note:'',
             },
             term_20:[],
-            pay_20:{
-                value:'',
-                note:''
-            },
-            calculate_pay_20:false,
+            pay_20:[],
         },
         medium:{
             premium:{
@@ -25,11 +21,7 @@ $(document).ready(function() {
                 note:'',
             },
             term_20:[],
-            pay_20:{
-                value:'',
-                note:''
-            },
-            calculate_pay_20:false,
+            pay_20:[],
         },
         high:{
             premium:{
@@ -37,11 +29,7 @@ $(document).ready(function() {
                 note:'',
             },
             term_20:[],
-            pay_20:{
-                value:'',
-                note:''
-            },
-            calculate_pay_20:false,
+            pay_20:[],
         }
     }
     var saved_responses = {
@@ -52,7 +40,11 @@ $(document).ready(function() {
                 2:0,
                 3:0
             },
-            pay_20:0
+            pay_20:{
+                1:0,
+                2:0,
+                3:0
+            }
         },
         medium:{
             
@@ -61,7 +53,11 @@ $(document).ready(function() {
                 2:0,
                 3:0
             },
-            pay_20:0
+            pay_20:{
+                1:0,
+                2:0,
+                3:0
+            }
         },
         high:{
             
@@ -70,7 +66,11 @@ $(document).ready(function() {
                 2:0,
                 3:0
             },
-            pay_20:0
+            pay_20:{
+                1:0,
+                2:0,
+                3:0
+            }
         }   
     }
     var current_fs, next_fs, previous_fs; //fieldsets
@@ -83,7 +83,7 @@ $(document).ready(function() {
 
     scope.$apply(function(){
         if(scope.questioniar_id != null){
-            console.log(scope.state,scope.questioniar);
+            // console.log(scope.state,scope.questioniar);
             populateData(scope.state,scope.questioniar);
             
             if(scope.state < 13){
@@ -98,8 +98,7 @@ $(document).ready(function() {
                     current_fs = $("#step"+current);
                     current_fs.show();
                 }else{
-                    console.log('in else');
-                    current = parseInt(scope.state) + 1;
+                    current = parseInt(scope.state) + 4;
                     next = current + 1;
                     current_step = current - 3;
                     $("fieldset").hide();
@@ -196,7 +195,7 @@ $(document).ready(function() {
             for (const key of keys) {
                 if(saved_responses.low.term_20[key] == 1){
                     scope.$apply(function(){
-                        scope.saved_recomendations.push({ level:"Low" ,type:"term 20",value: result_calculation.low.term_20[key].type +": "+result_calculation.low.term_20[key]['range']});
+                        scope.saved_recomendations.push({ level:"Low" ,type:"Term 20",value: result_calculation.low.term_20[key].type +": "+result_calculation.low.term_20[key]['range']});
                     });
                 }
             }
@@ -205,7 +204,7 @@ $(document).ready(function() {
                 if(saved_responses.medium.term_20[key] == 1){
                
                     scope.$apply(function(){
-                        scope.saved_recomendations.push({ level:"Medium" ,type:"term 20",value:result_calculation.medium.term_20[key].type +": "+result_calculation.medium.term_20[key]['range'] });
+                        scope.saved_recomendations.push({ level:"Medium" ,type:"Term 20",value:result_calculation.medium.term_20[key].type +": "+result_calculation.medium.term_20[key]['range'] });
                     });
                 }
             }
@@ -214,21 +213,30 @@ $(document).ready(function() {
                 if(saved_responses.high.term_20[key] == 1){
             
                     scope.$apply(function(){
-                        scope.saved_recomendations.push({ level:"High" ,type:"term 20",value:result_calculation.high.term_20[key].type +": "+result_calculation.high.term_20[key]['range']});
+                        scope.saved_recomendations.push({ level:"High" ,type:"Term 20",value:result_calculation.high.term_20[key].type +": "+result_calculation.high.term_20[key]['range']});
                     });
                 }
             }; 
 
-            if(saved_responses.medium.pay_20 == 1){
-                scope.$apply(function(){
-                    scope.saved_recomendations.push({ level:"Medium" ,type:"Pay 20",value:result_calculation.medium.pay_20.value});
-                });
-            }
-            if(saved_responses.high.pay_20 == 1){
-                scope.$apply(function(){
-                    scope.saved_recomendations.push({ level:"High" ,type:"Pay 20",value:result_calculation.high.pay_20.value});
-                });
-            }
+            var pay_20_keys = Object.keys(saved_responses.medium.pay_20);
+            for (const pay_20_key of pay_20_keys) {
+                if(saved_responses.medium.pay_20[pay_20_key] == 1){
+            
+                    scope.$apply(function(){
+                        scope.saved_recomendations.push({ level:"Medium" ,type:"Pay 20",value:result_calculation.medium.pay_20[pay_20_key].type +": "+result_calculation.medium.pay_20[pay_20_key]['value']});
+                    });
+                }
+            }; 
+
+            var pay_20_keys = Object.keys(saved_responses.high.pay_20);
+            for (const pay_20_key of pay_20_keys) {
+                if(saved_responses.high.pay_20[pay_20_key] == 1){
+            
+                    scope.$apply(function(){
+                        scope.saved_recomendations.push({ level:"High" ,type:"Pay 20",value:result_calculation.high.pay_20[pay_20_key].type +": "+result_calculation.high.pay_20[pay_20_key]['value']});
+                    });
+                }
+            }; 
         }
         //Add Class Active
         // $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
@@ -779,7 +787,7 @@ $(document).ready(function() {
                 
                 var range1 = Math.round(result_calculation.y2 / 12);
                 var range2 = Math.round(result_calculation.y1 / 12) ;
-                if(scope.questioniar[4].value == 'no'){
+                if(scope.questioniar[4].value == 'No'){
                     if(range1 >= 50 && range2 <= 100 ){
                         result_calculation.recommended_option = 'low';
                     }else if(range1 >= 101 && range2 <= 299 ){
@@ -808,7 +816,7 @@ $(document).ready(function() {
             
             var range1 = Math.round(result_calculation.y2 / 12);
             var range2 = Math.round(result_calculation.y1 / 12) ;
-            if(scope.questioniar[4].value == 'no'){
+            if(scope.questioniar[4].value == 'No'){
                 if(range1 >= 50 && range2 <= 100 ){
                     result_calculation.recommended_option = 'low';
                 }else if(range1 >= 101 && range2 <= 299 ){
@@ -834,7 +842,7 @@ $(document).ready(function() {
         if(scope_initialize){
             scope.$apply(function(){
                 result_calculation.low.term_20 = [];
-                if(scope.questioniar[4].value == 'no'){
+                if(scope.questioniar[4].value == 'No'){
                     result_calculation.low.premium.value = '$50-$100 / month';
                 }else{
                     result_calculation.low.premium.value = '$100-$200 / month';
@@ -866,29 +874,29 @@ $(document).ready(function() {
     function populateLowRecommendation(){
         var low_premium_html = result_calculation.low.premium.value;
         if(result_calculation.low.premium.note != ''){
-            low_premium_html += "<small class='pl-4 text-danger'> ( "+ result_calculation.low.premium.note+" )</small>";
+            low_premium_html += "<br> <small class='pl-4 text-danger'> ( "+ result_calculation.low.premium.note+" )</small>";
         }  
         // low_premium_html += "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation'></i>";
         $("#low_premium").html(low_premium_html);
-        $("#low_term_20").html('');
         if(result_calculation.low.term_20.length > 0){
-            var str = "<ul class='ml-4 pl-4'>";
+            var str = "";
             result_calculation.low.term_20.forEach(function (value, index, array) {
                 str += "<li class'mb-2'>"+ value.type + 
                                         ": " +value.range +
                                         " <i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation' data-value='"+index+"' data-field='low.term_20'></i> <span class='clearfix'></span> </li>";
             });
-            str += "</ul>"
-            $("#low_term_20").append(str);
+            str += "";
+            $("#low_term_20").html(str);
         }else{
-            $("#low_term_20").append('--------');
+            $("#low_term_20").parent('div').html('');
         }
     }
     function mediumRecommendationOption(scope_initialize = 1){
         if(scope_initialize){
             scope.$apply(function(){
                 result_calculation.medium.term_20 = [];
-                if(scope.questioniar[4].value == 'no'){
+                result_calculation.medium.pay_20 = [];
+                if(scope.questioniar[4].value == 'No'){
                     result_calculation.medium.premium.value = '$150-$299 / month';
                 }else{
                     result_calculation.medium.premium.value = '$300-$600 / month';
@@ -898,11 +906,11 @@ $(document).ready(function() {
                     if(scope.questioniar[1].value.indexOf(1) != -1){
                         result_calculation.medium.term_20.push({ value:1, range: formatingCurrency(result_calculation.x1 *10, "blur") + " - " +  formatingCurrency(result_calculation.x2 *10, "blur") , type: 'Life Insurance Coverage', note:''}) ;
                         result_calculation.medium.calculate_pay_20 = true; 
-                        
+                        result_calculation.medium.pay_20.push({id:1, value:'$100k', type: 'Life Insurance Coverage', note:'This is a fixed and the most cost effective option' });                    
                     }
                     if(scope.questioniar[1].value.indexOf(2) != -1){
                         result_calculation.medium.term_20.push({ value:2, range: formatingCurrency(result_calculation.x1 *5, "blur") + " - " + formatingCurrency(result_calculation.x2 *5, "blur") , type:  'Critical Illness Insurance Coverage', note:''}) ;
-                        result_calculation.medium.calculate_pay_20 = true; 
+                        result_calculation.medium.pay_20.push({ id:2, value:'$100k', type: 'Critical Illness Insurance Coverage', note:'This is a fixed and the most cost effective option' });                     
                         
                     }
 
@@ -913,12 +921,12 @@ $(document).ready(function() {
                 }else{
                     if(scope.questioniar[1].sub_question[1].value == 1){
                         result_calculation.medium.term_20.push({ value:1, range: formatingCurrency(result_calculation.x1 *10, "blur") + " - " +  formatingCurrency(result_calculation.x2 *10, "blur") , type: 'Life Insurance Coverage', note:''}) ;
-                        result_calculation.medium.calculate_pay_20 = true; 
+                        result_calculation.medium.pay_20.push({ id:1, value:'$100k', type: 'Life Insurance Coverage', note:'This is a fixed and the most cost effective option' });                     
                         
                     }
                     if(scope.questioniar[1].sub_question[2].value == 2){
                         result_calculation.medium.term_20.push({ value:2, range: formatingCurrency(result_calculation.x1 *5, "blur") + " - " + formatingCurrency(result_calculation.x2 *5, "blur") , type:  'Critical Illness Insurance Coverage', note:''}) ;
-                        result_calculation.medium.calculate_pay_20 = true; 
+                        result_calculation.medium.pay_20.push({ id:2, value:'$100k', type: 'Critical Illness Insurance Coverage', note:'This is a fixed and the most cost effective option' });                     
                         
                     }
 
@@ -935,34 +943,57 @@ $(document).ready(function() {
     function populateMediumRecommendation(){
         var medium_premium_html = result_calculation.medium.premium.value;
         if(result_calculation.medium.premium.note != ''){
-            medium_premium_html += "<small class='pl-4 text-danger'> ( "+ result_calculation.medium.premium.note+" )</small>";
+            medium_premium_html += "<br> <small class='pl-4 text-danger'> ( "+ result_calculation.medium.premium.note+" )</small>";
         }  
         
         $("#medium_premium").html(medium_premium_html);
 
-        if(result_calculation.medium.calculate_pay_20 == true){
-            result_calculation.medium.pay_20.value = '$100k' ;
-            result_calculation.medium.pay_20.note = 'This is a fixed option';
-            var medium_pay_20_html = result_calculation.medium.pay_20.value;
-            if(result_calculation.medium.pay_20.note != ''){
-                medium_pay_20_html += "<small class='pl-4 text-danger'> ( "+ result_calculation.medium.pay_20.note+" )</small>";
-            } 
-            medium_pay_20_html += "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation'  data-field='medium.pay_20'></i> <span class='clearfix'></span>";
+        
 
-            $("#medium_pay_20").html(medium_pay_20_html);
+        // if(result_calculation.medium.calculate_pay_20 == true){
+        //     result_calculation.medium.pay_20.value = '$100k' ;
+        //     result_calculation.medium.pay_20.note = 'This is a fixed and the most cost effective option';
+        //     var medium_pay_20_html = result_calculation.medium.pay_20.value;
+        //     if(result_calculation.medium.pay_20.note != ''){
+        //         medium_pay_20_html += "<small class='pl-4 text-danger'> ( "+ result_calculation.medium.pay_20.note+" )</small>";
+        //     } 
+        //     medium_pay_20_html += "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation'  data-field='medium.pay_20'></i> <span class='clearfix'></span>";
+
+        //     $("#medium_pay_20").html(medium_pay_20_html);
+                
+
+        // }
+
+
+        if(result_calculation.medium.pay_20.length > 0){
+            var str = "";
+            result_calculation.medium.pay_20.forEach(function (value, index, array) {
+                str += "<li class='mb-2'>"+ value.type + 
+                                        ": " +value.value ;
+                if(value.note != ''){
+                    str += " <br> <small class='pl-4 text-danger'> ( "+ value.note+" )</small>";
+                }                      
+
+                str += "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation'  data-field='medium.pay_20'  data-value='"+index+"'></i> <span class='clearfix'></span>";
+            });
+            $("#medium_pay_20").html(str);
             $("#medium_pay_20_div").removeClass('d-none');    
-
         }
-        $("#medium_term_20").html('');   
+
+
+
+
         if(result_calculation.medium.term_20.length > 0){
-            var str = "<ul class='ml-4 pl-4'>";
+            var str = "";
             result_calculation.medium.term_20.forEach(function (value, index, array) {
                 str += "<li class='mb-2'>"+ value.type + 
                                         ": " +value.range +
                                         "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation' data-value='"+index+"' data-field='medium.term_20'></i><span class='clearfix'></span> </li>";
             });
-            str += "</ul>"
-            $("#medium_term_20").append(str);    
+            str += ""
+            $("#medium_term_20").html(str);    
+        }else{
+            $("#medium_term_20").parent('div').html('');
         }
     }
 
@@ -971,7 +1002,7 @@ $(document).ready(function() {
             scope.$apply(function(){
                 result_calculation.high.term_20 = [];
 
-                if(scope.questioniar[4].value == 'no'){
+                if(scope.questioniar[4].value == 'No'){
                     result_calculation.high.premium.value = '$300+/ month';
                 }else{
                     result_calculation.high.premium.value = '$600+ / month';
@@ -979,12 +1010,14 @@ $(document).ready(function() {
                 }
                 if(scope.questioniar[1].value.indexOf(4) == -1){
                     if(scope.questioniar[1].value.indexOf(1) != -1){
-                        result_calculation.high.term_20.push({ value:1, range: formatingCurrency(result_calculation.x2 *10, "blur") + " - " + formatingCurrency(result_calculation.x1 *10, "blur") , type: 'Life Insurance Coverage', note:''}) ;
-                        result_calculation.high.calculate_pay_20 = true;
+                        result_calculation.high.term_20.push({ value:1, range: formatingCurrency(result_calculation.x1 *10, "blur") + " - " + formatingCurrency(result_calculation.x2 *10, "blur") , type: 'Life Insurance Coverage', note:''}) ;
+                        result_calculation.high.pay_20.push({ id:1, value:'$500k', type: 'Life Insurance Coverage', note:'This is a fixed option' });                     
+                        
                     }
                     if(scope.questioniar[1].value.indexOf(2) != -1){
-                        result_calculation.high.term_20.push({value:2, range: formatingCurrency(result_calculation.x2 *5, "blur") + " - " + formatingCurrency(result_calculation.x1 *5, "blur") , type: 'Critical Illness Insurance Coverage', note:''}) ;         
-                        result_calculation.high.calculate_pay_20 = true;
+                        result_calculation.high.term_20.push({value:2, range: formatingCurrency(result_calculation.x1 *5, "blur") + " - " + formatingCurrency(result_calculation.x2 *5, "blur") , type: 'Critical Illness Insurance Coverage', note:''}) ;         
+                        result_calculation.high.pay_20.push({ id:2, value:'$500k', type: 'Critical Illness Insurance Coverage', note:'This is a fixed option'});                     
+                        
                     }
 
 
@@ -993,12 +1026,13 @@ $(document).ready(function() {
                     }    
                 }else{
                     if(scope.questioniar[1].sub_question[1].value == 1){
-                        result_calculation.high.term_20.push({ value:1, range: formatingCurrency(result_calculation.x2 *10, "blur") + " - " + formatingCurrency(result_calculation.x1 *10, "blur") , type: 'Life Insurance Coverage', note:''}) ;
-                        result_calculation.high.calculate_pay_20 = true;
+                        result_calculation.high.term_20.push({ value:1, range: formatingCurrency(result_calculation.x1 *10, "blur") + " - " + formatingCurrency(result_calculation.x2 *10, "blur") , type: 'Life Insurance Coverage', note:''}) ;
+                        result_calculation.high.pay_20.push({ id:1, value:'$500k', type: 'Life Insurance Coverage', note:'This is a fixed option' });                     
+                        
                     }
                     if(scope.questioniar[1].sub_question[2].value == 2){
-                        result_calculation.high.term_20.push({value:2, range: formatingCurrency(result_calculation.x2 *5, "blur") + " - " + formatingCurrency(result_calculation.x1 *5, "blur") , type: 'Critical Illness Insurance Coverage', note:''}) ;         
-                        result_calculation.high.calculate_pay_20 = true;
+                        result_calculation.high.term_20.push({value:2, range: formatingCurrency(result_calculation.x1 *5, "blur") + " - " + formatingCurrency(result_calculation.x2 *5, "blur") , type: 'Critical Illness Insurance Coverage', note:''}) ;         
+                        result_calculation.high.pay_20.push({ id:2, value:'$500k', type: 'Critical Illness Insurance Coverage', note:'This is a fixed option' });                     
                     }
 
                     if(scope.questioniar[1].sub_question[3].value == 3){
@@ -1012,34 +1046,50 @@ $(document).ready(function() {
     function populateHighRecommendation(){
         var high_premium_html = result_calculation.high.premium.value;
         if(result_calculation.high.premium.note != ''){
-            high_premium_html += "<small class='pl-4 text-danger'> ( "+ result_calculation.high.premium.note+" )</small>";
+            high_premium_html += "<br> <small class='pl-4 text-danger'> ( "+ result_calculation.high.premium.note+" )</small>";
         }  
         
         $("#high_premium").html(high_premium_html);
 
-        if(result_calculation.high.calculate_pay_20 == true){
-            result_calculation.high.pay_20.value = '$500k' ;
-            result_calculation.high.pay_20.note = 'This is a fixed option';  
+        // if(result_calculation.high.calculate_pay_20 == true){
+        //     result_calculation.high.pay_20.value = '$500k' ;
+        //     result_calculation.high.pay_20.note = 'This is a fixed option';  
 
-            var high_pay_20_html = result_calculation.high.pay_20.value;
-            if(result_calculation.high.pay_20.note != ''){
-                high_pay_20_html += "<small class='pl-4 text-danger'> ( "+ result_calculation.high.pay_20.note+" )</small>";
-            }
-            high_pay_20_html += "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation' data-field='high.pay_20'></i><span class='clearfix'></span>";
+        //     var high_pay_20_html = result_calculation.high.pay_20.value;
+        //     if(result_calculation.high.pay_20.note != ''){
+        //         high_pay_20_html += "<small class='pl-4 text-danger'> ( "+ result_calculation.high.pay_20.note+" )</small>";
+        //     }
+        //     high_pay_20_html += "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation' data-field='high.pay_20'></i><span class='clearfix'></span>";
 
-            $("#high_pay_20").html(high_pay_20_html);
+        //     $("#high_pay_20").html(high_pay_20_html);
+        //     $("#high_pay_20_div").removeClass('d-none');    
+        // }
+
+        if(result_calculation.high.pay_20.length > 0){
+            var str = "";
+            result_calculation.high.pay_20.forEach(function (value, index, array) {
+                str += "<li class='mb-2'>"+ value.type + 
+                                        ": " +value.value ;
+                if(value.note != ''){
+                    str += " <br> <small class='pl-4 text-danger'> ( "+ value.note+" )</small>";
+                }                      
+
+                str += "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation'  data-field='high.pay_20'  data-value='"+index+"'></i> <span class='clearfix'></span>";
+            });
+            $("#high_pay_20").html(str);
             $("#high_pay_20_div").removeClass('d-none');    
         }
-        $("#high_term_20").html('');
+
         if(result_calculation.high.term_20.length > 0){
-            var str = "<ul class='ml-4 pl-4'>";
+            var str = "";
             result_calculation.high.term_20.forEach(function (value, index, array) {
                 str += "<li class='mb-2'>"+ value.type + 
                                         ": " +value.range +
                                         "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation'  data-value='"+index+"' data-field='high.term_20'></i><span class='clearfix'></span> </li>";
             });
-            str += "</ul>"
-            $("#high_term_20").append(str);    
+            $("#high_term_20").html(str);    
+        }else{
+            $("#high_term_20").parent('div').html('');
         }
     }
 
@@ -1098,27 +1148,27 @@ $(document).ready(function() {
             $(this).addClass('fa-bookmark');
             
             var field = $(this).attr('data-field');
-            if(field.indexOf(".term_20") != -1){
+            // if(field.indexOf(".term_20") != -1){
                 field = field.split('.');
                 var index = $(this).attr('data-value');
                 saved_responses[field[0]][field[1]][index] = 1;
-            }else{
-                field = field.split('.');
-                saved_responses[field[0]][field[1]] = 1;
-            }
+            // }else{
+            //     field = field.split('.');
+            //     saved_responses[field[0]][field[1]] = 1;
+            // }
 
         }else if($(this).hasClass('fa-bookmark')){
             $(this).removeClass('fa-bookmark');
             $(this).addClass('fa-bookmark-o');
             var field = $(this).attr('data-field');
-            if(field.indexOf(".term_20") != -1){
+            // if(field.indexOf(".term_20") != -1){
                 field = field.split('.');
                 var index = $(this).attr('data-value');
                 saved_responses[field[0]][field[1]][index] = 0;
-            }else{
-                field = field.split('.');
-                saved_responses[field[0]][field[1]] = 0;
-            }
+            // }else{
+            //     field = field.split('.');
+            //     saved_responses[field[0]][field[1]] = 0;
+            // }
         }
     });
 
