@@ -83,7 +83,7 @@ $(document).ready(function() {
 
     scope.$apply(function(){
         if(scope.questioniar_id != null){
-            // console.log(scope.state,scope.questioniar);
+            console.log(scope.state,scope.questioniar);
             populateData(scope.state,scope.questioniar);
             
             if(scope.state < 13){
@@ -97,9 +97,15 @@ $(document).ready(function() {
                     $("fieldset").hide();
                     current_fs = $("#step"+current);
                     current_fs.show();
+                    console.log('if');
                 }else{
-                    current = parseInt(scope.state) + 4;
-                    next = current + 1;
+                    current = parseInt(scope.state);
+                    if(current == 1){
+                        current = parseInt(scope.state) + 4;
+                    }else{
+                        current = parseInt(scope.state) + 1;  
+                    }
+                    next = current + 1  ;
                     current_step = current - 3;
                     $("fieldset").hide();
                     current_fs = $("#step"+current);
@@ -107,7 +113,6 @@ $(document).ready(function() {
                     setProgressBar(current_step,current,0);
                 }
                 if(scope.state == 12){
-                    console.log(scope.recommendations);
                     result_calculation = scope.recommendations;
                     findRecommendationOption(0);
                     populateLowRecommendation();
