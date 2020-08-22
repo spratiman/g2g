@@ -31,45 +31,45 @@ color:white;
 }
 
 .login-container{
-	margin: 5% auto;
+  margin: 5% auto;
 }
 
 .pd-top-dynamic{
-	min-height: 450px;
+  min-height: 450px;
 }
 
 .header-bg{
-	background: #819CCC;
+  background: #819CCC;
 }
 
 #q7-input{
-	background-color: white !important;
-	height: 30px;
+  background-color: white !important;
+  height: 30px;
 }
 .q7-op1:before,.q7-op1:after,.q5-op2:before,.q5-op2:after {
-	top: 0.50rem;
+  top: 0.50rem;
 }
 #q1-sub-questions{
-	margin:3%;
-	font-size: 14px;
+  margin:3%;
+  font-size: 14px;
 }
 #q1-sub-questions p{
-	margin-top: 1%
+  margin-top: 1%
 }
 .error-div{
-	display: none;
+  display: none;
 }
 .error{
-	display:block;
-	color: red;
+  display:block;
+  color: red;
 }
 
 .form-control.is-invalid{
-	border-color: #dc3545 !important;
+  border-color: #dc3545 !important;
     padding-right: calc(1.5em + 0.75rem) !important;
 }
 #q9-file-section{
-	display: none;
+  display: none;
 }
 .btn-outline-primary:hover,.btn-outline-primary:not(:disabled):not(.disabled):active {
     color: #fff;
@@ -92,8 +92,8 @@ color:white;
 */
 
 .gotoregister{
-	width: auto !important;
-	padding: 10px !important;
+  width: auto !important;
+  padding: 10px !important;
     margin: 10px !important;
 }
 
@@ -116,4 +116,11 @@ color:white;
 }
 .pd-top-5-per{
   padding-top: 5%;
+}
+
+@media screen and (max-width: 768px) {
+
+#content-desktop {display: none;}
+#content-mobile {display: block;}
+
 }
