@@ -992,8 +992,11 @@ $(document).ready(function() {
             var str = "";
             result_calculation.medium.term_20.forEach(function (value, index, array) {
                 str += "<li class='mb-2'>"+ value.type + 
-                                        ": " +value.range +
-                                        "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation' data-value='"+index+"' data-field='medium.term_20'></i><span class='clearfix'></span> </li>";
+                                        ": " + value.range;
+                if(value.note != ''){
+                    str += " <br> <small class='pl-4 text-danger'> ( "+ value.note+" )</small> ";
+                }
+                str += "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation' data-value='"+index+"' data-field='medium.term_20'></i><span class='clearfix'></span> </li>";
             });
             str += ""
             $("#medium_term_20").html(str);    
@@ -1089,8 +1092,12 @@ $(document).ready(function() {
             var str = "";
             result_calculation.high.term_20.forEach(function (value, index, array) {
                 str += "<li class='mb-2'>"+ value.type + 
-                                        ": " +value.range +
-                                        "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation'  data-value='"+index+"' data-field='high.term_20'></i><span class='clearfix'></span> </li>";
+                                        ": " +value.range;
+                if(value.note != ''){
+                    str += " <br> <small class='pl-4 text-danger'> ( "+ value.note+" )</small> ";
+                }
+                str += "<i class='fa fa-bookmark-o pull-right add-to-cart' aria-hidden='true' data-toggle='tooltip' title='Save Recommendation'  data-value='"+index+"' data-field='high.term_20'></i><span class='clearfix'></span> </li>";
+                                        
             });
             $("#high_term_20").html(str);    
         }else{
